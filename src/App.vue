@@ -7,7 +7,7 @@ const newTask = ref('')
 const addTask = () => {
   if (newTask.value === '') {
     console.log('Please enter a task')
-    return 
+    return
   }
   listTask.value.push({
     id: listTask.value.length + 1,
@@ -15,6 +15,10 @@ const addTask = () => {
     completed: false
   })
   newTask.value = ''
+}
+
+const removeTask = (id) => {
+  listTask.value = listTask.value.filter(task => task.id !== id)
 }
 
 </script>
@@ -27,6 +31,7 @@ const addTask = () => {
       <li v-for="task in listTask" :key="task.id">
         <input type="checkbox" v-model="task.completed">
         {{ task.title }}
+        <button @click="removeTask(task.id)">Remove</button>
       </li>
     </ul>
   </div>
